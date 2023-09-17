@@ -1,0 +1,72 @@
+{% extends '../page.html' %}
+{% block pagecontent %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow p-3">
+                <div class="card-heading">
+                    <h3 class="mb-4 border-bottom pb-2">Add Event Detail</h3>
+                </div>
+                <div class="card-body">
+                    <form action="/notifier/insert_event_detail" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row mb-3">
+                            <div class="col">
+                                    <label for="eventdate">Event Date</label>
+                                    <input name="eventdate" id="eventdate" type="date" class="form-control" placeholder="Event date" required >
+                            </div>
+                            <div class="col">
+                                <label for="eventtime">Event Time</label>
+                                <input name="eventtime" id="eventtime" type="time" class="form-control" placeholder="Event time" required >
+                            </div>
+                            <div class="col">
+                                <label for="duration">Event Date</label>
+                                <input name="duration" id="duration" type="number" class="form-control" placeholder="Event duration" required >
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="address1">Address Line 1</label>
+                                <textarea class="form-control" id="address1" name="address1" required ></textarea>
+                            </div>
+                            <div class="col">
+                                <label for="address2">Address Line 2</label>
+                                <textarea class="form-control" id="address2" name="address2" required ></textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="contactperson">Contact Person</label>
+                                <input name="contactperson" id="contactperson" type="text" class="form-control" placeholder="Contact Person" required >
+                            </div>
+                            <div class="col">
+                                <label for="contactno">Contact No</label>
+                                <input name="contactno" id="contactno" type="number" class="form-control" placeholder="Contact No" required >
+                            </div>
+                            <div class="col">
+                                <b>is Available?</b> <br>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="is_canceled" id="no" value="0">
+                                    <label class="form-check-label" for="free">No</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="is_canceled" id="yes" value="1">
+                                    <label class="form-check-label" for="paid">Yes</label>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="submit" value="Save" class="btn btn-primary btn-lg">
+                            <input type="reset" value="clear all" class="btn btn-warning btn-lg">
+                        </div>
+                        <input type="hidden" name="eventid" value="{{eventid}}">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+{% endblock %}

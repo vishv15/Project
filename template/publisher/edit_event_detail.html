@@ -1,0 +1,85 @@
+{% extends '../page.html' %}
+{% block pagecontent %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow p-3">
+                <div class="card-heading">
+                    <h3 class="mb-4 border-bottom pb-2">Edit Event Detail</h3>
+                </div>
+                <div class="card-body">
+                    <form action="/notifier/edit_event_detail" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row mb-3">
+                            <div class="col">
+                                    <label for="eventdate">Event Date</label>
+                                    <input name="eventdate" id="eventdate" type="date" class="form-control" placeholder="Event date"
+                                    value="{{temp}}" required >
+                            </div>
+                            <div class="col">
+                                <label for="eventtime">Event Time {{temp2}}</label>
+                                <input name="eventtime" id="eventtime" type="time" 
+                                value="{{temp2}}" class="form-control" placeholder="Event time" required >
+                            </div>
+                            <div class="col">
+                                <label for="duration">Event Date</label>
+                                <input name="duration" id="duration" type="number" value="{{event_detail.duration}}" class="form-control" placeholder="Event duration" required >
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="address1">Address Line 1</label>
+                                <textarea class="form-control" id="address1" name="address1" required >{{event_detail.address1}}</textarea>
+                            </div>
+                            <div class="col">
+                                <label for="address2">Address Line 2</label>
+                                <textarea class="form-control" id="address2" name="address2" required >{{event_detail.address2}}</textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="contactperson">Contact Person</label>
+                                <input name="contactperson" id="contactperson" type="text" 
+                                value="{{event_detail.contactperson}}" class="form-control" placeholder="Contact Person" required >
+                            </div>
+                            <div class="col">
+                                <label for="contactno">Contact No</label>
+                                <input name="contactno" id="contactno" type="number" 
+                                value="{{event_detail.contactno}}" class="form-control" placeholder="Contact No" required >
+                            </div>
+                            <div class="col">
+                                <b>is Available?</b> <br>
+                                <div class="form-check form-check-inline">
+                                    {% if event_detail.is_canceled == 1 %}
+                                        <input class="form-check-input" type="radio" name="is_canceled" id="no" value="0" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="radio" name="is_canceled" id="no" value="0">
+                                    {% endif %}
+                                    <label class="form-check-label" for="free">No</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    {% if event_detail.is_canceled == 0 %}
+                                    <input class="form-check-input" type="radio" name="is_canceled" id="yes" value="1" checked >
+                                    {% else %}
+                                    <input class="form-check-input" type="radio" name="is_canceled" id="yes" value="1">
+                                    {% endif %}
+                                    
+                                    <label class="form-check-label" for="paid">Yes</label>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="submit" value="Save changes" class="btn btn-primary btn-lg">
+                            <input type="reset" value="clear all" class="btn btn-warning btn-lg">
+                        </div>
+                        <input type="hidden" name="eventdetailid" value="{{event_detail.id}}">
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+{% endblock %}

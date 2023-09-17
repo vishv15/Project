@@ -1,0 +1,74 @@
+{% extends '../page.html' %}
+{% block pagecontent %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow p-3">
+                <div class="card-heading">
+                    <h3 class="mb-4 border-bottom pb-2">Add Event</h3>
+                </div>
+                <div class="card-body">
+                    <form action="insert_event" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Event Title" required name="title">
+                        </div>
+                        <div class="mb-3">
+                            <label for="Detail">Event Detail</label>
+                            <textarea id="detail" class="form-control" placeholder="Detail" required name="detail">
+                            </textarea>
+                        
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <label for="photo">Select Photo for event</label>
+                                <input type="file" class="form-control" id="photo"
+                                    accept="image/*" required name="photo">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="categoryid">Select City</label>
+                                <select id="categoryid" class="form-control" aria-label="Default select" name="city">
+                                    <option selected="">Select city</option>
+                                    {% for city in city_table %}
+                                        <option value={{city.title}}>{{city.title}}</option>
+                                    {% endfor %}
+                                    </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <b>Select Event Type</b> <br><br>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="eventtype" id="free" value="0">
+                                    <label class="form-check-label" for="free">Free</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="eventtype" id="paid" value="1">
+                                    <label class="form-check-label" for="paid">Paid</label>
+                                    </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="categoryid">Select Category</label>
+                                <select id="categoryid" class="form-control" aria-label="Default select" name="categoryid">
+                                    <option selected="">Select category</option>
+                                    {% for category in category_table %}
+                                        <option value={{category.id}}>{{category.title}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="submit" value="Add New Event" class="btn btn-primary btn-lg">
+                            <input type="reset" value="clear all" class="btn btn-warning btn-lg">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+{% endblock %}

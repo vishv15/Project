@@ -1,0 +1,60 @@
+{% extends '../page.html' %}
+{% block pagecontent %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow p-3">
+                <div class="card-heading">
+                    <h3 class="mb-4 border-bottom pb-2">Event management</h3>
+                </div>
+                <div class="card-body">
+                    <p class="text-right my-2">
+                        <a href="/notifier/insert_event" class="btn btn-primary ">Add Event</a>
+                    </p>
+                    <p class="text-success text-center">{{message}}</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th width="14%">Action</th>
+                                    <th>Title</th>
+                                    <th>Detail</th>
+                                    <th>Photo</th>
+                                    <th>City</th>
+                                    <th>Event Type </th>
+                                </tr>
+                            </thead>
+                           
+                            <tbody>
+                                {% for row in event_table %}
+                                <tr>
+                                    <td>
+                                        <a title="Edit" href="/notifier/edit_event/{{row.id}}"><i class="fa-2x fa fa-pen"></i></a>
+                                        <a title="Delete" href="/notifier/delete_event/{{row.id}}"><i class="fa-2x fa fa-trash"></i></a>
+                                        <a title="View Detail" href="/notifier/view_event_detail/{{row.id}}/{{row.categoryid}}"><i class="fa-2x fa fa-eye"></i></a>
+                                    </td>
+                                    <td>{{row.title}}</td>
+                                    <td>{{row.detail}}</td>
+                                    <td width="25%">
+                                        <img src="/{{row.photo}}" class="img-fluid">
+                                    </td>
+                                    <td>{{row.city}}</td>
+                                    <td>
+                                        {% if row.eventtype == 0 %}
+                                            Free
+                                        {% else %}
+                                            Paid
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor  %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div> <!-- end of card body -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
